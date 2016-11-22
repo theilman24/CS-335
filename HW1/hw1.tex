@@ -1,0 +1,59 @@
+\documentclass[11pt]{amsart}
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx, txfonts} %txfonts makes the letters sharp
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{amsthm, amssymb, amsfonts, amsmath, enumerate}
+\usepackage{mathrsfs} %Needed for \mathscr
+\usepackage{relsize}%, xfrac} % for resizing in math mode
+
+
+
+\begin{document}
+
+
+
+
+\title[CS/MATH 335 HW 1]{CS/MATH 335: Probability, Computing, and Graph Theory \\ Homework 1\\ Due in class Friday, September 16, 2016}
+\maketitle
+
+{Taylor Heilman and Matt Iamarino}
+
+%\noindent Show all work to ensure full credit. 
+%\\
+
+\textbf{Partner Problems}
+
+\begin{enumerate}
+
+\item \fbox{\parbox{\textwidth}{
+See Matt's hand in for Partner Problems
+}} 
+
+
+\end{enumerate}
+
+\noindent \textbf{Individual Problems}
+\begin{enumerate}
+
+\item[(5)] \fbox{\parbox{\textwidth}{
+Mitzenmacher 2.6
+$\newline$
+
+1.) Notice $\mathbf{E}[X | x_1 = 2] = 5.5, \mathbf{E}[X | x_1 = 4] = 7.5, $ and $\mathbf{E}[X | x_1 = 6] = 9.5$. Since each of these are equally likely to occur if $x_1$ is even, our answer is $\mathbf{E}[X | x_1$ is even$] = \frac{5.5 + 7.5 + 9.5}{3} = 7.5$
+$\newline$
+
+2.) Notice the $P(x_1 = x_2) = \frac{1}{6}$.  If $x_1 = x_2$, then the possible values for $X$ are: $2, 4, 6, 8, 10, 12$. Hence, $E[ X | x_1 = x_2] = \sum_{x=2}^{12} x( \frac{1}{6} ) = 7$
+$\newline$
+
+3.) The possible ways for $X= 9$ are the combinations of $(3,6), (4,5), (5,4), (6,3)$, so $P(X = 9) = \frac{1}{9}$. So $E[ x_1 | X = 9] = \sum_{x=3}^{6} x( \frac{1}{9} ) = 4.5$.  This makes sense because $x_1$ can either be $3, 4, 5, 6$ and the average value of those 4 numbers is $4.5$
+$\newline$
+
+4.) For this problem I wasn't completely sure how to go about solving it, so I just used reasoning to get an answer.  First I noticed that the Probability of $X = k$ for $k$ in the range $[2, 12] = 1.0$.  This makes sense because the lowest values you can roll on a die is $1$, so $1+1 = 2$ and the highest possible number is $6$, so $6+6=12,$ hence you're guaranteed to roll a number in the range of $[2, 12].$ Now looking at $x_1 - x_2$, if $x_1 = 1$, then the possible values of $x_1 - x_2$ are $0, -1, -2, -3, -4, -5$, if $x_1 = 2$ the possible values of $x_1 - x_2$ are $1, 0, -1, -2, -3, -4$.  I noticed a pattern that as $x_1$ increases by 1, all possible values of $X$ shift up one in the positive direction.  This means that the  $E[x_1 - x_2 | X = k] = 0$.
+}} 
+
+\end{enumerate}
+
+\end{document}

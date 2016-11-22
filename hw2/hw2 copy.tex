@@ -1,0 +1,186 @@
+\documentclass[11pt]{amsart}
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx, txfonts} %txfonts makes the letters sharp
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{amsthm, amssymb, amsfonts, amsmath, enumerate}
+\usepackage{mathrsfs} %Needed for \mathscr
+\usepackage{relsize}%, xfrac} % for resizing in math mode
+
+
+\begin{document}
+
+\title[CS/MATH 335 HW 2]{CS/MATH 335: Probability, Computing, and Graph Theory \\ Homework 1\\ Due in class Friday, September 23, 2016}
+\maketitle
+
+{Taylor Heilman and Matt Iammarino (Taylor's copy)}
+
+\textbf{Partner Problems}
+
+Roughly in order of difficulty
+
+\begin{enumerate}
+
+\item \fbox{\parbox{\textwidth}{
+
+}} 
+{
+This technique would result in an item that is uniformly distributed over all items in the stream. This is because while the first item in the list is guaranteed to be stored, it also has to have every item after it not be heads. In contrast, the last item has a much smaller probability of being stored, but it does not have to worry about items being stored after it. Since the probability of heads decreases as the $m$ increases, the probability between being heads and also having the rest of the items after it being tails is roughly equal for every $m$ in the sampling. 
+
+
+}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 2.13
+}}
+
+
+{
+
+a.)  According to the problem we have $2n$ different coupons and $n$ pairs of coupons.  From this information we know that $X =  \sum_{i=1}^{n} x_i $. We also need to calculate the probability of getting a coupon from a new pair when we have $i-1$ pairs. Notice the the probability of choosing a specific coupon is $ = \frac{1}{2n}$. \newline
+Then we get $E[x_i] = \frac{1}{2n}(2n - 2(i-1))$, since we have $2n - 2(i-1)$ available coupon pairs. \newline\newline
+$E[x_i] = \frac{(2n - 2(i-1))}{2n} = \frac{n-i+1}{n}$.    \newline \newline
+
+To find  $E[X]$ we do the following:
+ $\newline$
+ 
+$\Rightarrow E[X] = E[\sum_{i=1}^{n} x_i ]$
+
+$\newline$
+$\Rightarrow  \sum_{i=1}^{n} E[x_i]$
+
+$\newline$
+$\Rightarrow  \sum_{i=1}^{n}  \frac{n-i+1}{n}$
+
+$\newline$
+$\Rightarrow n \sum_{i=1}^{n}  \frac{1}{n}$
+
+We saw that this summation results in the harmonic number ($H(n) = ln(n) + \theta(1)$ )and the expected number of boxes required to obtain all coupons is $n*ln( n) + \theta(n)$
+
+$\newline$
+
+b.) In the case when there are $kn$ different coupons organized into $n$ disjoint sets of $k$ coupons, the probability of choosing a coupon would be $\frac{1}{kn}$ and trying to find the $i$th pair, there would only $kn - k(i-1)$ coupons left to fulfill a new pair, with $i-1$ pairs already found. So the $k$'s would cancel out as the 2's did in part (a) and we would obtain the same answer of $n*ln( n) + \theta(n)$. \newline
+
+}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 2.7 
+
+}}
+
+{
+
+a.) Using the information provided that $X$ and $Y$ are independent geometric random variables, $Pr(X=Y) = \sum_{x} (1-p)^{x-1}p (1-q)^{x-1}q$
+$\newline$
+
+$\Rightarrow \sum_{x} [(1-p)(1-q)]^{x-1}pq$
+$\newline$
+
+So, $Pr(X=Y) = \frac{pq}{p+q-pq}$
+
+$\newline$
+b.) $E[max(X,Y)] = E[X] + E[Y] - E[min(X,Y)]$. Notice $E[min(X,Y)] = \frac{1}{p+q-pq}$. Hence, $E[max(X,Y)] = \frac{1}{p} + \frac{1}{q} - \frac{1}{p+q-pq}$
+
+$\newline$
+c.) To find the $Pr(min(X,Y)=k)$ we can split the event into two events:
+$\newline$
+
+$\Rightarrow Pr(X=k, Y \geq k) + Pr(X > k, Y = k)$ 
+$\newline$
+ 
+$\Rightarrow Pr(X=k) Pr(Y \geq k) + Pr(X > k) Pr(Y = k)$ 
+$\newline$
+
+$\Rightarrow$ Notice $Pr(X>k) = Pr(X \geq k)-Pr(x=k) = (1-p)^{k-1}(1-p)$
+$\newline$
+
+ $\Rightarrow Pr(min(X,Y)=k) = (1-p)^{k-1}p(1-q)^{k-1} + (1-p)^{k-1}(1-p)(1-q)^{k-1}q$
+$\newline$
+
+$\Rightarrow = [(1-p)(1-q)]^{k-1}(p+q-pq)$
+
+$\newline$
+d.) 
+
+
+ $E[ X |X \leq Y]  = \sum_z x\frac{Pr(X=x) \cap x \leq Y}{Pr(X \leq Y)}$
+ 
+ Now we compute compute $Pr( X \leq Y):$
+
+$\Rightarrow \sum_z Pr(X= z) Pr(z \leq Y)$
+$\newline$
+
+$\Rightarrow \sum_z (1-p)^{z-1}p(1-q)^{z-1}$
+$\newline$
+
+$\Rightarrow p \sum_z[(1-p-q+pq)]^{z-1}$
+$\newline$
+
+$\Rightarrow \frac{p}{p+q-pq}$
+
+$\newline$
+Hence we get:
+$\newline$
+
+$\Rightarrow \frac{p}{p+q-pq} \sum_x x(1-p)^{x-1}p(1-q)^{x-1}$
+
+$\Rightarrow (p+q-pq) \sum_x x(1-p-q+pq)^{x-1}$
+
+$\Rightarrow  E[ X |X \leq Y] = \frac{1}{p+q -pq}$
+}
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 3.7 
+}}
+
+{
+
+For the case of the stock market, we know that on any given day the price will either rise or fall based upon the probability of $p$. Since there are $d$ number of days, we would expect that the stock market rise on $p*d$ days and fall on $(1-p)*d$ days. We also know that the price rises by a factor of $r$ or falls by a factor of $1/r$. The expected value of the price after $d$ days will be the product of the days that the price rose by the days that the price fell. Since we expect the price to rise on $p*d$ days then the risen prices will be $r^{p*d}$ and since we expect the price to fall on $(1-p)*d$ days then the fallen prices will be $r^{-(1-p)*d}$ \newline
+Thus, our expected value will be $E[X] = r^{p*d} * r^{-(1-p)*d}$\newline
+$E[X] = r^{p*d} * r^{-(1-p)*d}$\newline
+$E[X] = r^{pd - ((1-p)d)}$\newline
+$E[X] = r^{d(p-(1-p))}$\newline
+$E[X] = r^{d(2p-1)}$\newline
+The formula for the Var(X) $= E[X^2] - (E[X])^2$\newline
+Using this equation, we have that \newline
+$Var(X) = r^{d^{2}(2p-1)} - (r^{d(2p-1)})^2$\newline
+$= r^{d^{2}(2p-1)} - (r^{2(d(2p-1))})$\newline
+
+
+}
+\end{enumerate}
+
+\noindent \textbf{Individual Problems}
+\begin{enumerate}
+
+\item[(5)] \fbox{\parbox{\textwidth}{
+Mitzenmacher 3.1
+
+}} 
+
+{Since $X$ is being chosen uniformly at random from $[1,n]$ we know that $P(X=x) = \frac{1}{n}$. Using the formula $V(X) = E[X^2] - (E[X])^2$ we get:
+$\newline$
+
+$\Rightarrow \sum_{x=1} ^{n} x^2 (\frac{1}{n})$ - $( \sum_{x=1}^{n} x (\frac{1}{n})) ^2$
+$\newline$
+
+$\Rightarrow \frac{1}{n} (1+4+9+...+n^2) - ( \frac{1}{n} (1+2+3+...+n) )^2$
+$\newline$
+
+$\Rightarrow \frac{1}{n}(\frac{n(n+1)(2n+1)}{6})- \frac{1}{n} ( \frac{n(n+1)}{2})^2$
+$\newline$
+
+$\Rightarrow \frac{(n+1)(2n+1)}{6} - \frac{(n+1)^2}{4}$
+$\newline$
+
+$\Rightarrow \frac{(n+1)(4n+2-3n-3)}{12}$
+$\newline$
+
+$\Rightarrow \frac{(n+1)(n-1)}{12} = \frac{n^2 - 1}{12}$
+
+}
+
+\end{enumerate}
+
+\end{document}

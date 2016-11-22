@@ -1,0 +1,106 @@
+\documentclass[11pt]{amsart}
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx, txfonts} %txfonts makes the letters sharp
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage{epstopdf}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{amsthm, amssymb, amsfonts, amsmath, enumerate}
+\usepackage{mathrsfs} %Needed for \mathscr
+\usepackage{relsize}%, xfrac} % for resizing in math mode
+
+
+
+\usepackage{graphicx}
+\graphicspath{ {Desktop/} }
+\begin{document}
+
+\title[CS/MATH 335 HW 8]{CS/MATH 335: Probability, Computing, and Graph Theory \\ Homework 8\\ Due Tuesday, November 15th, 2016}
+\maketitle
+
+{Taylor Heilman and Matt Iammarino}
+
+\textbf{Partner Problems}
+
+Roughly in order of difficulty
+
+\begin{enumerate}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.6}} 
+{
+
+Suppose that a Graph $G$ has $m$ edges. We can then show that this graph $G$ has a $k$-cut with a value at least $(k-1)m/k$.
+We can see this because for a given edge, the probability that the edge connects a vertex in a given set to a vertex in one of the other $k-1$ sets is $(k-1)/k$, since there are a total of $k-1$ out of the $k$ that would cause their to be a cut. When we sum of this probability over all of the $m$ edges, for $X= $ the value of the $k-$cut, $E[X] = \sum_{i =1}^{m} (k-1)/k$. Thus, we can see that the expected value for the $k$-cut will be $(k-1)m/k$. By the Expectation Argument, we know that there has to be a graph that has at least a value of $(k-1)m/k$. 
+
+
+We can then use Conditional Expectation in order to derandomize he algorithm. We know that $E[C(A_1,A_2,...A_k)] \geq (k-1)m/k$, where $A_1,A_2,...A_k$ are the $k$ different sets of vertices . Let us assume that $E[C(A_1,A_2,...A_k) | x_1,x_2,...x_l]$ is the expected value if the first $l$ elements are already inputted into the sets. This is the conditional expectation given we know the location of the first $l$ elements. We want to show inductively that placing the next element will maximize the value of the cut. So we want to show that.. \newline
+$E[C(A_1,A_2,...A_k) | x_1,x_2,...x_l] \leq E[C(A_1,A_2,...A_k) | x_1,x_2,...x_{l+1}]$\newline
+By doing that, then we can show that $E[C(A_1,A_2,...A_k)] \leq E[C(A_1,A_2,...A_k) | x_1,x_2,...x_n]$\newline
+
+First let us start in the base case, we know that 
+$E[C(A_1,A_2,...A_k) | x_1] = E[C(A_1,A_2,...A_k)]$ because only one vertex has been placed and it doesn't matter where it is placed. \newline
+
+Then by Induction, we want to show.. \newline
+$E[C(A_1,A_2,...A_k) | x_1,x_2,...x_l] \leq E[C(A_1,A_2,...A_k) | x_1,x_2,...x_{l+1}]$\newline
+
+We will introduce a random variable $Y_{l+1}$ to be the set location of the $v_{l+1}$ vertex. Since the probability that the vertex is placed in any set is $1/k$, then we know that.. \newline
+ $E[C(A_1,A_2,...A_k) | x_1,x_2,...x_l] = (1/k)*E[C(A_1,A_2,...A_k) | x_1,x_2,...,x_l, Y_{l+1} = A_1] + (1/k)*E[C(A_1,A_2,...A_k) | x_1,x_2,...,x_l, Y_{l+1} = A_2]+.... + (1/k)*E[C(A_1,A_2,...A_k) | x_1,x_2,...,x_l, Y_{l+1} = A_k]$\newline
+ Then, we need to choose the set in which adding that vertex will maximizes the expectation. So we then know that.. \newline
+ 
+ max$((1/k)*E[C(A_1,A_2,...A_k) | x_1,x_2,...,x_l, Y_{l+1} = A_1] + (1/k)*E[C(A_1,A_2,...A_k) | x_1,x_2,...,x_l, Y_{l+1} = A_2]+.... + (1/k)*E[C(A_1,A_2,...A_k) | x_1,x_2,...,x_l, Y_{l+1} = A_k]) \geq E[C(A_1,A_2,...A_k) | x_1,x_2,...x_l]$. \newline
+ 
+ Thus, $E[C(A_1,A_2,...A_k) | x_1,x_2,...x_l] \leq E[C(A_1,A_2,...A_k) | x_1,x_2,...x_{l+1}]$\newline
+ 
+ Now we just have to figure out how to select the set that will maximize the expectation. It turns out that when we get to the $v_{l+1}$ vertex, all of the previous vertices are already the same for each expectation. In order to maximize further expectations, we would want to place the vertex in the set that has the fewest of its neighbors. This will cause for the greatest amounts of cuts across sets at the end. So our algorithm involves placing the first vertex arbitrarily and then selecting the set that has the fewest neighbors of the vertex as the location to place that vertex. \newline
+
+
+}
+
+\item \fbox{\parbox{\textwidth}{
+Proof
+}}
+
+{
+"Suppose you are given a graph $G$ and you are $3$ coloring the vertices. Prove that there exists a coloring in which two thirds of the edges have distinct colors on their ends." \newline
+
+Suppose that we have three colors, A, B, and C. \newline
+Then for any given vertex, each color has Probability $\frac{1}{3}$. The probability that an edge is connected to two vertices of the same color would be the probability that both vertices are the same color for a given edge which is $\frac{1}{3} * \frac{1}{3} = \frac{1}{9}$. We then need to use the union bound since there are 3 possible colors, so the probability that both the vertices are the same color for a given edge is $\frac{1}{9} * 3 = \frac{1}{3}$. Thus, the probability that an edge is connected with two vertices that are not the same color is $1- \frac{1}{3} = \frac{2}{3}$. Since the probability that an edge is connected with two vertices that are not the same color is $1- \frac{1}{3} = \frac{2}{3}$, then the expected value for the number of edges in a graph that have vertices of different colors is $E[X] = \frac{2}{3}E(G)$, where $X$ is the number of edges in a graph that have vertices of different colors and E(G) is the number of edges in G. By the expectation argument, since the expectation is $\frac{2}{3}E(G)$, then there must be at least one instance where the graph has at least $\frac{2}{3}$ of its edges have distinct colors on their end.
+
+
+
+}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.7 
+
+}}
+
+{
+A dominating set is a set of vertices such that the individual intersection with every edge does not yield the empty set. We decided to attack this problem by sample and modify. \newline
+First, we want to randomly choose vertices with probability $p$. \newline
+Then, for every edge, if the intersection with edge and the dominating set is the empty set, then add a vertex from the edge to the dominating set. \newline
+
+To compute the expected number of vertices in the dominating set, we can compute it by linearity of expectations. For the first part, if there are $n$ vertices, the we would expect $np$ vertices to be chosen in the first part. In the second part, the probability that all of the vertices in the edge are not in the dominating set is $(1-p)^r$, when it is an $r$-uniform graph. Calculating the expected number of vertices in the second part would be $\sum_{i=1}^{m} (1-p)^r$, which is $m(1-p)^r$. By adding these expectations, we get that $E[X] = np + m(1-p)^r$ for the total number of vertices in the dominating set. By the Expectation Argument, we know that there has to be one dominating set of size at most $np + m(1-p)^r$. 
+
+b. 
+
+
+
+}
+
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.9
+
+}} 
+
+{
+a. For a given ranking, the probability that an edge disagrees with the ranking is $1/2$ or $.5$ because each edge either agrees or disagrees. Over all of the $m$ edges then, we would expect  $\sum_{i=1}^{m} (1/2) = m/2$ to disagree. Thus by the Expectation Argument, we know there exists a ranking such that half of the edges disagree. 
+
+
+}
+\end{enumerate}
+
+\end{document}

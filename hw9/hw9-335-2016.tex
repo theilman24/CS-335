@@ -1,0 +1,75 @@
+\documentclass[11pt]{amsart}
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx, txfonts} %txfonts makes the letters sharp
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{amsthm, amssymb, amsfonts, amsmath, enumerate}
+\usepackage{mathrsfs} %Needed for \mathscr
+\usepackage{relsize}%, xfrac} % for resizing in math mode
+
+
+
+\begin{document}
+
+
+\title[CS/MATH 335 HW 9]{CS/MATH 335: Probability, Computing, and Graph Theory \\ Homework 9\\ Due in class Thursday, December 1, 2016 \\
+One problem (your choice) due Thursday, November 17}
+\maketitle
+
+
+\noindent Show all work to ensure full credit. 
+\\
+
+\textbf{Partner Problems}
+
+Roughly in order of difficulty
+
+\begin{enumerate}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.16. 
+}}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.11.
+}}
+
+\item \fbox{\parbox{\textwidth}{
+Section 6.3 analyzed the following algorithm for constructing an independent set: for every $v\in G$, delete $v$ and all edges touching $v$ with probability $1 - 1 /d$. Let $H$ be the set of vertices which survive this process.
+
+\begin{enumerate}
+\item Use the method of conditional expectations to turn this algorithm into a deterministic algorithm which always finds an independent set of size $n/2d$.
+\item Let G be a 3-regular graph (i.e. all vertices have degree 3). Consider the randomized algorithm that deletes each vertex independently with probability 2/3 as above. For every edge that remains, delete one of its end-points randomly. Derive an upper bound on the probability that this algorithm finds an independent set smaller than $n(1 - \epsilon)/6$. Hint: Chernoff bounds.
+\end{enumerate}
+}}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.15. Hint: this is the challenge problem. You can do each part independently of the others. So make sure to attempt all parts of this problem.
+}} 
+
+BONUS partner problem:
+
+\item \fbox{\parbox{\textwidth}{
+Fix a constant $p \in (0,1)$. Prove that almost no graph in $G(n,p)$ has a complete separating subgraph.
+}} 
+
+\end{enumerate}
+
+\noindent \textbf{Individual Problems}
+\begin{enumerate}
+
+\item[(6)] \fbox{\parbox{\textwidth}{
+Mitzenmacher 6.8.
+}} 
+
+BONUS individual problem:
+
+\item[(7)] \fbox{\parbox{\textwidth}{
+Given $d \in \mathbb{N}$, is there a threshold function for the property of containing a $d$-dimensional cube? If so, what is the threshold function? If not, why not?
+}}
+
+\end{enumerate}
+
+\end{document}

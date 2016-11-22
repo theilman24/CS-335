@@ -1,0 +1,131 @@
+\documentclass[11pt]{amsart}
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx, txfonts} %txfonts makes the letters sharp
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{amsthm, amssymb, amsfonts, amsmath, enumerate}
+\usepackage{mathrsfs} %Needed for \mathscr
+\usepackage{relsize}%, xfrac} % for resizing in math mode
+
+
+\begin{document}
+
+\title[CS/MATH 335 HW 2]{CS/MATH 335: Probability, Computing, and Graph Theory \\ Homework 1\\ Due in class Friday, September 23, 2016}
+\maketitle
+
+{Taylor Heilman and Matt Iammarino}
+
+\textbf{Partner Problems}
+
+Roughly in order of difficulty
+
+\begin{enumerate}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 3.8
+
+}} 
+
+{
+
+
+}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 3.23
+}}
+
+{
+
+
+
+
+
+}
+
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 3.12 
+
+}}
+
+{
+
+
+}
+\item \fbox{\parbox{\textwidth}{
+Mitzenmacher 3.11 
+}}
+
+{
+
+}
+\end{enumerate}
+
+\noindent \textbf{Individual Problems}
+\begin{enumerate}
+
+\item[(5)] \fbox{\parbox{\textwidth}{
+Mitzenmacher  4.6
+
+}} 
+
+{
+a.) 
+
+We can look at this problem as a Poisson trial, with each ballot either going to person A(0) or person B(1). With the given information of $p = 0.02$ we can easily compute the expected number of misread ballots, which is $1,000,000 * .02 = 20,000$, so our mean $=  20,000$. Letting $X$ be the number of misread ballots we want to find the $P(X \geq 40,000)$, since $.02(1,000,000) = 40,000$.  Then we compute:
+$\newline$
+
+ $\Rightarrow (1 + \delta)\mu = 40,000$
+
+$\Rightarrow (1 + \delta) 20,000 = 40,000$
+
+$\Rightarrow 1+ \delta = 2$
+
+$\Rightarrow  \delta = 1$
+
+Hence,
+
+$\Rightarrow P( X \geq 40,000) < (\frac{e^1}{2^2})^{20,000}$
+
+$\Rightarrow P( X \geq 40,000) < 4.89(10^{-3365}) $
+
+Which is essentially,
+
+$\Rightarrow P( X \geq 40,000) = 0 $
+$\newline$
+
+b.)
+
+The votes for each candidate are $A= 510,000, B= 490,000$.
+
+Now we'll let $x =$ the number of votes for $A$ that are misread and $y =$ the number of votes for $B$ that are misread.
+
+So if $x-y > 10,000$ then candidate $B$ should have won. 
+
+$\Rightarrow E[x-y] = E[x] - E[y]$
+
+$\Rightarrow 10,200 - 9,800 = 400$
+
+$\Rightarrow 10,000 = (1 + \delta)400$
+
+Now we must find $\delta$ 
+
+$\Rightarrow 25 = 1+ \delta$
+
+$\Rightarrow  \delta = 24$
+
+$\Rightarrow Pr(x-y > 10,000) < ( \frac{e^{24}}{25^{25}})^{400}$
+
+$\Rightarrow Pr(x-y > 10,000) < 10 ^{-9810.2}$
+
+Which is essentially $Pr(x-y > 10,000) = 0$
+
+
+
+}
+
+\end{enumerate}
+
+\end{document}
